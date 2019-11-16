@@ -6,6 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
+        
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
@@ -38,19 +39,19 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <Welcome/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Welcome from './components/Welcome';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    Welcome,
   },
 
   data: () => ({
