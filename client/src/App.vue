@@ -39,23 +39,31 @@
     </v-app-bar>
 
     <v-content>
-      <Welcome/>
+      <v-app-bar light>
+        <v-btn @click="show--;"><v-icon>mdi-arrow-left</v-icon></v-btn>
+        <v-spacer></v-spacer>
+        <v-btn @click="show++;"><v-icon>mdi-arrow-right</v-icon></v-btn>
+    </v-app-bar>
+      <Welcome v-show="show==0"/>
+      <StoreWindow v-show="show==1"/>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Welcome from './components/Welcome';
+import StoreWindow from './components/StoreWindow'
 
 export default {
   name: 'App',
 
   components: {
     Welcome,
+    StoreWindow,
   },
 
   data: () => ({
-    //
+    show: 0,
   }),
 };
 </script>
