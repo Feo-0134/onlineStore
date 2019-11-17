@@ -11,6 +11,7 @@
     "@mdi/font": "^3.6.95",
     "core-js": "^3.3.2",
     "roboto-fontface": "*",
+    "store": "^2.0.12",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0"
   },

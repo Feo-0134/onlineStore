@@ -27,7 +27,7 @@
 
                 <v-card-actions>
                 <v-btn text>¥ {{n.price}}</v-btn>
-                <v-btn text>Purchase</v-btn>
+                <v-btn @click="payment(n.name);" text>Purchase</v-btn>
                 </v-card-actions>
             </v-card>
           </v-item>
@@ -35,11 +35,53 @@
       </v-row>
     </v-container>
   </v-item-group>
+<v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+        class = "float-right"
+          color="red lighten-2"
+          dark
+          style=" postion: fixed, bottom:10px, right:10px"
+          v-on="on"
+        >
+          Pay
+        </v-btn>
+      </template>
 
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          Item List
+        </v-card-title>
+
+        <v-card-text>
+          {{content}}
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="dialog = false"
+          >
+            I accept
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+</v-dialog>
   </v-container>
 </template>
 
 <script>
+var store = require('store')
 export default {
   name: 'StoreWindow',
 
@@ -63,7 +105,18 @@ export default {
             detail: 'best badge forever',
             imgSrc: 'https://img0.etsystatic.com/211/0/15254996/il_fullxfull.1286564300_eik6.jpg'
         },
-    ]
+    ],
+    content: '',
+    dialog: false,
   }),
+  methods: {
+      payment(name) {
+        store.set('item',{
+            item: name
+        })
+        this.content = store.get('user')
+        this.content.item = store.get('item')
+      }
+  },
 };
 </script>
