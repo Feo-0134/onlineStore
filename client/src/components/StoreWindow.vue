@@ -46,6 +46,7 @@
           dark
           style=" postion: fixed, bottom:10px, right:10px"
           v-on="on"
+          @click="postPurchase()"
         >
           Pay
         </v-btn>
@@ -70,7 +71,7 @@
           <v-btn
             color="primary"
             text
-            @click="dialog = false"
+            @click="dialog = false;"
           >
             I accept
           </v-btn>
@@ -86,6 +87,9 @@ export default {
   name: 'StoreWindow',
 
   data: () => ({
+    info:{},
+    person: {},
+    itemName: '',
     itemList:[
         {
             name: 'markCup',
@@ -109,13 +113,31 @@ export default {
     content: '',
     dialog: false,
   }),
+  computed:{
+    payLoad() {
+      return {
+        item: this.itemName,
+        amount: 1,
+        person: this.info
+      }
+    }
+
+  },
   methods: {
+      postPurchase() {
+        new Promise((resolve, reject) => {
+          this.$http.post('http://localhost:3000/api/purchase', this.payLoad)
+          .then((response)=> { resolve(response) })
+          .catch((error)=> { reject(error) })
+        })
+      },
       payment(name) {
         store.set('item',{
             item: name
         })
-        this.content = store.get('user')
-        this.content.item = store.get('item')
+        this.itemName = name
+        this.info = store.get('user')
+        this.content = this.payLoad
       }
   },
 };

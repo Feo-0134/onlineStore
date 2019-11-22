@@ -52,9 +52,8 @@
           md="3"
         >
           <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
+            v-model="form.userContact"
+            label="mobile"
             required
           ></v-text-field>
         </v-col>

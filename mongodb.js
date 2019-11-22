@@ -9,6 +9,6 @@ if(process.env.NODE_ENV === 'production') {
     connString = process.env.DB_CONNECTSTRING_DEV
 }
 
-mongoose.connect(connString, { useNewUrlParser: true })
+mongoose.connect(connString, {useUnifiedTopology: true, useNewUrlParser: true })
 const db = mongoose.connection
 module.exports = db
